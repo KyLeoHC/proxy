@@ -5,6 +5,11 @@ let http = require('http'),
     url = require('url');
 let dom = require('./utils/dom');
 
+/**
+ * http请求，走普通的代理方式即可
+ * @param cReq
+ * @param cRes
+ */
 function request(cReq, cRes) {
     let u = url.parse(cReq.url);
 
@@ -40,6 +45,11 @@ function request(cReq, cRes) {
     cReq.pipe(pReq);
 }
 
+/**
+ * https请求，走隧道代理的方式，对后续请求数据进行盲转发（本身数据是加密的）
+ * @param cReq
+ * @param cSock
+ */
 function connect(cReq, cSock) {
     let u = url.parse('http://' + cReq.url);
 
