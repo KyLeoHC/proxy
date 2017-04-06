@@ -12,7 +12,7 @@ let dom = require('./utils/dom');
  */
 function request(cReq, cRes) {
     let u = url.parse(cReq.url);
-
+    console.log(u.href, cReq.method);
     let options = {
         hostname: u.hostname,
         port: u.port || 80,
@@ -33,6 +33,7 @@ function request(cReq, cRes) {
                     html = dom.parse(html);
                     cRes.writeHead(pRes.statusCode, pRes.headers);
                     cRes.write(html);
+                    cRes.end();
                 });
         } else {
             cRes.writeHead(pRes.statusCode, pRes.headers);
